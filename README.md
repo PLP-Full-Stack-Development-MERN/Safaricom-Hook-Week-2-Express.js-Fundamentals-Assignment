@@ -1,27 +1,29 @@
-Week 2: Express.js Fundamentals Assignment
+**Week 2: Express.js Fundamentals Assignment**
 
 **Objective:**
 
 - Apply Express.js concepts learned throughout the week.
-- Practice building an Express.js server with routing, middleware, and error handling.
+- Develop hands-on experience with creating routes, middleware, and API endpoints.
+- Understand and implement RESTful APIs.
 
 **Instructions:**
 
 1. **Setup Express.js Project:**
 
-   - Install Node.js using NVM and initialize an Express project.
-   - Create a new project folder called `express-assignment`.
-   - Run the following commands:
+   - Install Node.js using NVM.
+   - Create a new project folder named `express-assignment`.
+   - Initialize a Node.js project using:
      ```sh
-     mkdir express-assignment
-     cd express-assignment
      npm init -y
-     npm install express
+     ```
+   - Install necessary dependencies:
+     ```sh
+     npm install express dotenv
      ```
 
 2. **Project Structure:**
 
-   - Organize your project files as follows:
+   - Organize your project files with a clear folder structure:
      ```
      express-assignment/
      │-- routes/
@@ -29,96 +31,63 @@ Week 2: Express.js Fundamentals Assignment
      │    ├── productRoutes.js
      │-- middleware/
      │    ├── logger.js
+     │-- controllers/
+     │    ├── userController.js
+     │    ├── productController.js
      │-- index.js
      │-- package.json
      │-- README.md
+     │-- .env
      ```
 
-3. **Implement Routing:**
+3. **Create Routes:**
 
-   - Create `routes/userRoutes.js` with the following routes:
-     ```js
-     const express = require('express');
-     const router = express.Router();
-
-     router.get('/', (req, res) => res.send('User List'));
-     router.get('/:id', (req, res) => res.send(`User ID: ${req.params.id}`));
-
-     module.exports = router;
-     ```
-   - Create `routes/productRoutes.js` with the following routes:
-     ```js
-     const express = require('express');
-     const router = express.Router();
-
-     router.get('/', (req, res) => res.send('Product List'));
-     router.post('/', (req, res) => res.send('Product Added'));
-
-     module.exports = router;
-     ```
+   - Create `userRoutes.js` and `productRoutes.js` inside the `routes/` folder.
+   - Implement RESTful routes for users and products (GET, POST, PUT, DELETE).
+   - Ensure proper usage of route parameters and query strings.
 
 4. **Implement Middleware:**
 
-   - Create a middleware function in `middleware/logger.js` to log requests:
-     ```js
-     function logger(req, res, next) {
-         console.log(`${req.method} ${req.url} at ${new Date().toISOString()}`);
-         next();
-     }
-     module.exports = logger;
-     ```
+   - Create a custom middleware function in `middleware/logger.js` to log request details (method, URL, timestamp).
+   - Apply middleware globally to all routes.
 
-5. **Set Up the Express Server:**
+5. **Develop Controllers:**
 
-   - In `index.js`, set up the Express app with routes and middleware:
-     ```js
-     const express = require('express');
-     const app = express();
-     const logger = require('./middleware/logger');
-     const userRoutes = require('./routes/userRoutes');
-     const productRoutes = require('./routes/productRoutes');
+   - Create controller functions in `controllers/userController.js` and `controllers/productController.js`.
+   - Implement business logic to handle requests and responses.
 
-     app.use(logger);
-     app.use('/users', userRoutes);
-     app.use('/products', productRoutes);
+6. **Environment Variables:**
 
-     const PORT = process.env.PORT || 3000;
-     app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-     ```
+   - Use `dotenv` to manage environment variables.
+   - Define variables such as `PORT` in the `.env` file and access them inside the application.
 
-6. **Error Handling:**
+7. **Error Handling:**
 
-   - Implement a global error handler at the end of `index.js`:
-     ```js
-     app.use((err, req, res, next) => {
-         console.error(err.stack);
-         res.status(500).send('Something went wrong!');
-     });
-     ```
+   - Implement a global error-handling middleware to catch and respond to errors gracefully.
 
-7. **Testing:**
+8. **Testing:**
 
    - Run the server using:
      ```sh
      node index.js
      ```
-   - Test the routes using Postman or your browser by visiting:
-     - `http://localhost:3000/users`
-     - `http://localhost:3000/products`
+   - Test API endpoints using Postman or cURL.
+   - Verify routes, middleware functionality, and error handling.
 
-8. **Documentation:**
+9. **Documentation:**
 
-   - Add a `README.md` with instructions on how to run the project.
+   - Add a `README.md` with instructions on setting up and running the project.
+   - Document available API endpoints with descriptions and example requests.
 
-9. **Submission:**
+10. **Submission:**
 
    - Push your code to your GitHub repository.
 
 **Evaluation Criteria:**
 
-- Correct implementation of routes and middleware.
-- Proper error handling.
-- Project structure and code organization.
-- Clear and concise documentation.
-- Successful testing of endpoints.
+- Correct implementation of Express routes and middleware.
+- Proper error handling and logging.
+- Clean project structure and code organization.
+- Detailed documentation with clear instructions.
+- Successful testing of all endpoints.
 
